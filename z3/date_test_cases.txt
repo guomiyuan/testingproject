@@ -1,0 +1,135 @@
+Test case for getDesiredFormat
+sat
+(
+  (define-fun minute () Int
+    0)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    15)
+  (define-fun hour () Int
+    0)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    6)
+)
+Test case for parseDate - basic format
+sat
+(
+  (define-fun minute () Int
+    0)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    20)
+  (define-fun hour () Int
+    0)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    7)
+)
+Test case for parseDate - with time
+sat
+(
+  (define-fun minute () Int
+    30)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    10)
+  (define-fun hour () Int
+    14)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    8)
+)
+Test case for getDaysBetweenTwoDate - simple difference
+sat
+(
+  (define-fun minute () Int
+    30)
+  (define-fun day1 () Int
+    10)
+  (define-fun hour () Int
+    14)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    6)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    10)
+  (define-fun day2 () Int
+    15)
+)
+Test case for getDaysBetweenTwoDate - cross month
+sat
+(
+  (define-fun minute () Int
+    30)
+  (define-fun day1 () Int
+    31)
+  (define-fun hour () Int
+    14)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    6)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    10)
+  (define-fun month1 () Int
+    1)
+  (define-fun month2 () Int
+    2)
+  (define-fun day2 () Int
+    3)
+)
+Test case for getDaysBetweenTwoDate - cross year
+sat
+(
+  (define-fun minute () Int
+    30)
+  (define-fun year2 () Int
+    2024)
+  (define-fun day1 () Int
+    31)
+  (define-fun hour () Int
+    14)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    6)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    10)
+  (define-fun month1 () Int
+    12)
+  (define-fun year1 () Int
+    2023)
+  (define-fun month2 () Int
+    1)
+  (define-fun day2 () Int
+    5)
+)
+sat
+(
+  (define-fun minute () Int
+    30)
+  (define-fun year () Int
+    2023)
+  (define-fun day () Int
+    10)
+  (define-fun hour () Int
+    14)
+  (define-fun second () Int
+    0)
+  (define-fun month () Int
+    6)
+)

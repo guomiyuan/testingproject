@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QuadraticTest</a> &gt; <a href="index.source.html" class="el_package">com.fastaccess.tfl.helper</a> &gt; <span class="el_source">DateHelper.java</span></div><h1>DateHelper.java</h1><pre class="source lang-java linenums">package com.fastaccess.tfl.helper;
+
+//import android.app.DatePickerDialog;
+//import android.app.TimePickerDialog;
+//import android.content.Context;
+//import android.text.format.DateUtils;
+//import android.widget.DatePicker;
+//import android.widget.EditText;
+//import android.widget.TimePicker;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by kosh20111 on 10/7/2015.
+ * &lt;p&gt;
+ * Helper Class to deal with time and dates
+ */
+<span class="nc" id="L23">public class DateHelper {</span>
+
+<span class="nc" id="L25">    public enum DateFormats {</span>
+<span class="nc" id="L26">        D_YYMMDD(&quot;yy-MM-dd&quot;), D_DDMMyy(&quot;dd-MM-yy&quot;),</span>
+<span class="nc" id="L27">        D_YYMMDD_N(&quot;yy-MMM-dd&quot;), D_DDMMyy_N(&quot;dd-MMM-yy&quot;),</span>
+<span class="nc" id="L28">        D_YYMMDDHHMMA_N(&quot;yy-MMM-dd, hh:mma&quot;), D_DDMMyyHHMMA_N(&quot;dd-MMM-yy, hh:mma&quot;),</span>
+<span class="nc" id="L29">        S_YYMMDD(&quot;yy/MM/dd&quot;), S_DDMMyy(&quot;dd/MM/yy&quot;),</span>
+<span class="nc" id="L30">        S_YYMMDDHHMMA(&quot;yy/MM/dd, hh:mma&quot;), S_DDMMyyHHMMA(&quot;dd/MM/yy, hh:mma&quot;),</span>
+<span class="nc" id="L31">        S_YYMMDDHHMMA_N(&quot;yy/MMM/dd, hh:mma&quot;), S_DDMMyyHHMMA_N(&quot;dd/MMM/yy, hh:mma&quot;),</span>
+<span class="nc" id="L32">        D_YYYYMMDD(&quot;yyyy-MM-dd&quot;), D_DDMMYYYY(&quot;dd-MM-yyyy&quot;),</span>
+<span class="nc" id="L33">        D_YYYYMMDDHHMMA(&quot;yyyy-MM-dd, hh:mma&quot;), D_DDMMYYYYHHMMA(&quot;dd-MM-yyyy, hh:mma&quot;),</span>
+<span class="nc" id="L34">        D_YYYYMMDD_N(&quot;yyyy-MMM-dd&quot;), D_DDMMYYYY_N(&quot;dd-MMM-yyyy&quot;),</span>
+<span class="nc" id="L35">        D_YYYYMMDDHHMMA_N(&quot;yyyy-MMM-dd, hh:mma&quot;), D_DDMMYYYYHHMMA_N(&quot;dd-MMM-yyyy, hh:mma&quot;),</span>
+<span class="nc" id="L36">        S_YYYYMMDD(&quot;yyyy/MM/dd&quot;), S_DDMMYYYY(&quot;dd/MM/yyyy&quot;),</span>
+<span class="nc" id="L37">        S_YYYYMMDDHHMMA(&quot;yyyy/MM/dd, hh:mma&quot;), S_DDMMYYYYHHMMA(&quot;dd/MM/yyyy, hh:mma&quot;),</span>
+<span class="nc" id="L38">        S_YYYYMMDDHHMMA_N(&quot;yyyy/MMM/dd, hh:mma&quot;), S_DDMMYYYYHHMMA_N(&quot;dd/MMM/yyyy, hh:mma&quot;),</span>
+<span class="nc" id="L39">        D_YYMMDDHHMMSSA_N(&quot;yy-MMM-dd, hh:mm:ssa&quot;), D_DDMMyyHHMMSSA_N(&quot;dd-MMM-yy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L40">        S_YYMMDDHHMMSSA(&quot;yy/MM/dd, hh:mm:ssa&quot;), S_DDMMyyHHMMSSA(&quot;dd/MM/yy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L41">        S_YYMMDDHHMMSSA_N(&quot;yy/MMM/dd, hh:mm:ssa&quot;), S_DDMMyyHHMMSSA_N(&quot;dd/MMM/yy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L42">        D_YYYYMMDDHHMMSSA(&quot;yyyy-MM-dd, hh:mm:ssa&quot;), D_DDMMYYYYHHMMSSA(&quot;dd-MM-yyyy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L43">        D_YYYYMMDDHHMMSSA_N(&quot;yyyy-MMM-dd, hh:mm:ssa&quot;), D_DDMMYYYYHHMMSSA_N(&quot;dd-MMM-yyyy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L44">        S_YYYYMMDDHHMMSSA(&quot;yyyy/MM/dd, hh:mm:ssa&quot;), S_DDMMYYYYHHMMSSA(&quot;dd/MM/yyyy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L45">        S_YYYYMMDDHHMMSSA_N(&quot;yyyy/MMM/dd, hh:mm:ssa&quot;), S_DDMMYYYYHHMMSSA_N(&quot;dd/MMM/yyyy, hh:mm:ssa&quot;),</span>
+<span class="nc" id="L46">        HHMMA(&quot;hh:mma&quot;), HHMM(&quot;hh:mm&quot;), HHMMSSA(&quot;hh:mm:ssa&quot;), HHMMSS(&quot;hh:mm:ss&quot;),</span>
+<span class="nc" id="L47">        DEFAULT(&quot;dd/MM/yyyy hh:mm a&quot;);</span>
+        private String dateFormat;
+
+<span class="nc" id="L50">        DateFormats(String dateFormat) {this.dateFormat = dateFormat;}</span>
+
+        public String getDateFormat() {
+<span class="nc" id="L53">            return dateFormat;</span>
+        }
+    }
+
+    /**
+     * @return hh:mm a || dd MMM hh:mm a
+     */
+//    public static String prettifyDate(long timestamp) {
+//        SimpleDateFormat dateFormat;
+//        if (DateUtils.isToday(timestamp)) {
+//            dateFormat = new SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault());
+//        } else {
+//            dateFormat = new SimpleDateFormat(&quot;dd MMM hh:mm a&quot;, Locale.getDefault());
+//        }
+//        return dateFormat.format(timestamp);
+//    }
+
+    /**
+     * @return hh:mm a || dd MMM hh:mm a
+     */
+//    public static String prettifyDate(String timestamp) {
+//        SimpleDateFormat dateFormat;
+//        if (DateUtils.isToday(Long.parseLong(timestamp))) {
+//            dateFormat = new SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault());
+//        } else {
+//            dateFormat = new SimpleDateFormat(&quot;dd MMM hh:mm a&quot;, Locale.getDefault());
+//        }
+//        return dateFormat.format(Long.parseLong(timestamp));
+//    }
+
+    /**
+     * @return dd/MM/yyyy
+     */
+    public static long getDateOnly(String date) {
+<span class="nc" id="L87">        SimpleDateFormat sample = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault());</span>
+        try {
+<span class="nc" id="L89">            return sample.parse(date).getTime();</span>
+<span class="nc" id="L90">        } catch (ParseException e) {</span>
+<span class="nc" id="L91">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L93">        return 0;</span>
+    }
+
+    /**
+     * @return dd/MM/yyyy
+     */
+    public static String getDateOnly(long time) {
+<span class="nc" id="L100">        return new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault()).format(time);</span>
+    }
+
+    /**
+     * @return dd/MM/yyyy, hh:mm a
+     */
+    public static String getDateAndTime(long time) {
+<span class="nc" id="L107">        SimpleDateFormat sample = new SimpleDateFormat(&quot;dd/MM/yyyy, hh:mm a&quot;, Locale.getDefault());</span>
+<span class="nc" id="L108">        return sample.format(new Date(time));</span>
+    }
+
+    /**
+     * @return dd/MM/yyyy, hh:mm a
+     */
+    public static String getDateAndTime(String time) {
+<span class="nc" id="L115">        SimpleDateFormat sample = new SimpleDateFormat(&quot;dd/MM/yyyy, hh:mm a&quot;, Locale.getDefault());</span>
+<span class="nc" id="L116">        return sample.format(time);</span>
+    }
+
+    /**
+     * @return hh:mm a
+     */
+    public static String getTimeOnly(long time) {
+<span class="nc" id="L123">        SimpleDateFormat sample = new SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault());</span>
+<span class="nc" id="L124">        return sample.format(time);</span>
+    }
+
+    /**
+     * @return today's date in format (dd/MM/yyyy HH:mm:ss)
+     */
+    public static String getTodayWithTime() {
+<span class="nc" id="L131">        SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy HH:mm:ss&quot;, Locale.getDefault());</span>
+<span class="nc" id="L132">        return dateFormat.format(new Date());</span>
+    }
+
+    /**
+     * @return today's date in format (dd/MM/yyyy)
+     */
+    public static String getToday() {
+<span class="nc" id="L139">        SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault());</span>
+<span class="nc" id="L140">        return dateFormat.format(new Date());</span>
+    }
+
+    /**
+     * @return tomorrows's date in format (dd/MM/yyyy)
+     */
+    public static String getTomorrow() {
+        try {
+<span class="nc" id="L148">            Calendar calendar = Calendar.getInstance();</span>
+<span class="nc" id="L149">            calendar.setTime(new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault()).parse(getToday()));</span>
+<span class="nc" id="L150">            calendar.add(Calendar.DATE, 1);</span>
+<span class="nc" id="L151">            Date tomorrow = calendar.getTime();</span>
+<span class="nc" id="L152">            return new SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault()).format(tomorrow);</span>
+<span class="nc" id="L153">        } catch (Exception e) {</span>
+<span class="nc" id="L154">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L156">        return null;</span>
+    }
+
+    /**
+     * @param old
+     *         ( must be dd/MM/yyyy, hh:mm a )
+     * @param newDate
+     *         ( must be dd/MM/yyyy, hh:mm a )
+     * @return number of days
+     */
+    public static Long getDaysBetweenTwoDate(String old, String newDate, DateFormats dateFormats) {
+<span class="nc" id="L167">        SimpleDateFormat myFormat = new SimpleDateFormat(dateFormats.getDateFormat(), Locale.getDefault());</span>
+        try {
+<span class="nc" id="L169">            Date date1 = myFormat.parse(old);</span>
+<span class="nc" id="L170">            Date date2 = myFormat.parse(newDate);</span>
+<span class="nc" id="L171">            long diff = date1.getTime() - date2.getTime();</span>
+<span class="nc" id="L172">            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L173">        } catch (ParseException e) {</span>
+<span class="nc" id="L174">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L176">        return null;</span>
+    }
+
+    /**
+     * @param old
+     *         ( must be dd/MM/yyyy, hh:mm a )
+     * @param newDate
+     *         ( must be dd/MM/yyyy, hh:mm a )
+     * @return number of hours
+     */
+    public static Long getHoursBetweenTwoDate(String old, String newDate, DateFormats dateFormats) {
+<span class="nc" id="L187">        SimpleDateFormat myFormat = new SimpleDateFormat(dateFormats.getDateFormat(), Locale.getDefault());</span>
+        try {
+<span class="nc" id="L189">            Date date1 = myFormat.parse(old);</span>
+<span class="nc" id="L190">            Date date2 = myFormat.parse(newDate);</span>
+<span class="nc" id="L191">            long diff = date1.getTime() - date2.getTime();</span>
+<span class="nc" id="L192">            return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L193">        } catch (ParseException e) {</span>
+<span class="nc" id="L194">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L196">        return null;</span>
+    }
+
+    public static Long getMinutesBetweenTwoDates(String old, String newDate, DateFormats dateFormats) {
+<span class="nc" id="L200">        SimpleDateFormat myFormat = new SimpleDateFormat(dateFormats.getDateFormat(), Locale.getDefault());</span>
+        try {
+<span class="nc" id="L202">            Date date1 = myFormat.parse(old);</span>
+<span class="nc" id="L203">            Date date2 = myFormat.parse(newDate);</span>
+<span class="nc" id="L204">            long diff = date1.getTime() - date2.getTime();</span>
+<span class="nc" id="L205">            return TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L206">        } catch (ParseException e) {</span>
+<span class="nc" id="L207">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L209">        return null;</span>
+    }
+
+    /**
+     * it will loop through {@link com.innov8tif.commonslib.helper.DateHelper.DateFormats} possible formats and returns the parsed date if any match.
+     */
+    public static long parseAnyDate(String date) {
+<span class="nc" id="L216">        long time = 0;</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">        for (DateFormats formats : DateFormats.values()) {</span>
+            try {
+<span class="nc" id="L219">                SimpleDateFormat format = new SimpleDateFormat(formats.getDateFormat(), Locale.getDefault());</span>
+<span class="nc" id="L220">                time = format.parse(date).getTime();</span>
+<span class="nc" id="L221">            } catch (Exception e) {</span>
+<span class="nc" id="L222">                e.printStackTrace();</span>
+<span class="nc" id="L223">            }</span>
+        }
+<span class="nc" id="L225">        return time;</span>
+    }
+
+    public static long parseDate(String date, DateFormats dateFormats) {
+<span class="nc" id="L229">        SimpleDateFormat format = new SimpleDateFormat(dateFormats.getDateFormat(), Locale.getDefault());</span>
+        try {
+<span class="nc" id="L231">            return format.parse(date).getTime();</span>
+<span class="nc" id="L232">        } catch (ParseException e) {</span>
+<span class="nc" id="L233">            e.printStackTrace();</span>
+        }
+
+<span class="nc" id="L236">        return 0;</span>
+    }
+
+    public static String getDesiredFormat(DateFormats formats) {
+<span class="nc" id="L240">        SimpleDateFormat format = new SimpleDateFormat(formats.getDateFormat(), Locale.getDefault());</span>
+<span class="nc" id="L241">        return format.format(new Date());</span>
+    }
+
+    public static String getDesiredFormat(DateFormats formats, long date) {
+<span class="nc" id="L245">        SimpleDateFormat format = new SimpleDateFormat(formats.getDateFormat(), Locale.getDefault());</span>
+<span class="nc" id="L246">        return format.format(date);</span>
+    }
+
+//    public static DatePickerDialog datePickerDialog(final Context context, final EditText date, final boolean withTime, final DateFormats
+//            dateFormats) {
+//        return new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                Calendar newDate = Calendar.getInstance();
+//                newDate.set(year, monthOfYear, dayOfMonth);
+//                date.setText(getDesiredFormat(dateFormats, newDate.getTimeInMillis()));
+//                if (withTime) {
+//                    timePickerDialog(context, date, true).show();
+//                }
+//            }
+//        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH),
+//                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//    }
+
+//    public static TimePickerDialog timePickerDialog(final Context context, final EditText date, final boolean withAppend) {
+//        return new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+//            // FIXME: 02/12/15 timePicker for android 4.++ &lt; 5.0
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+//                if (view.isShown()) {
+//                    Calendar datetime = Calendar.getInstance();
+//                    datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//                    datetime.set(Calendar.MINUTE, minutes);
+//                    if (withAppend) {
+//                        date.setText(String.format(&quot;%s, %s&quot;, date.getText().toString(), getDesiredFormat(DateFormats.HHMMA, datetime
+//                                .getTimeInMillis())));
+//                    } else {
+//                        date.setText(getDesiredFormat(DateFormats.HHMMA, datetime.getTimeInMillis()));
+//                    }
+//                }
+//            }
+//        }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+//                Calendar.getInstance().get(Calendar.MINUTE), true);
+//    }
+
+    public static String getDateFromDays(int numOfDays) {
+<span class="nc" id="L286">        Calendar cal = Calendar.getInstance();</span>
+<span class="nc" id="L287">        cal.add(Calendar.DAY_OF_MONTH, numOfDays);</span>
+<span class="nc" id="L288">        return getDesiredFormat(DateFormats.D_DDMMyy_N, cal.getTimeInMillis());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

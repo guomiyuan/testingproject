@@ -1,0 +1,150 @@
+=== Test case: Two distinct real roots ===
+sat
+(
+  (define-fun c () Real
+    (/ 1.0 2.0))
+  (define-fun a () Real
+    1.0)
+  (define-fun b () Real
+    2.0)
+)
+=== Test case: Single real root ===
+sat
+(
+  (define-fun c () Real
+    (/ 1.0 4.0))
+  (define-fun a () Real
+    1.0)
+  (define-fun b () Real
+    1.0)
+)
+=== Test case: Complex roots ===
+sat
+(
+  (define-fun c () Real
+    (- 2.0))
+  (define-fun a () Real
+    (- 1.0))
+  (define-fun b () Real
+    1.0)
+)
+=== Test case: Very small positive a ===
+sat
+(
+  (define-fun b () Real
+    2.0)
+  (define-fun a () Real
+    (/ 11.0 20000000000.0))
+  (define-fun c () Real
+    0.0)
+)
+=== Test case: Very small negative a ===
+sat
+(
+  (define-fun b () Real
+    2.0)
+  (define-fun a () Real
+    (- (/ 11.0 20000000000.0)))
+  (define-fun c () Real
+    0.0)
+)
+=== Test case: Very large a coefficient ===
+sat
+(
+  (define-fun b () Real
+    0.0)
+  (define-fun a () Real
+    100000000000000000001.0)
+  (define-fun c () Real
+    0.0)
+)
+=== Test case: Very large b coefficient ===
+sat
+(
+  (define-fun b () Real
+    100000000000000000001.0)
+  (define-fun a () Real
+    0.0)
+  (define-fun c () Real
+    0.0)
+)
+=== Test case: b² >> 4ac (large b) ===
+sat
+(
+  (define-fun b () Real
+    (/ 100000000000001.0 10000.0))
+  (define-fun a () Real
+    (/ 1.0 10000.0))
+  (define-fun c () Real
+    (- (/ 1.0 10000.0)))
+)
+=== Test case: b² >> 4ac (small ac) ===
+sat
+(
+  (define-fun b () Real
+    (/ 10000000001.0 10000000000.0))
+  (define-fun a () Real
+    (- (/ 1.0 10000000000.0)))
+  (define-fun c () Real
+    (/ 1.0 10000000000.0))
+)
+=== Test case: Fractional coefficients ===
+sat
+(
+  (define-fun b () Real
+    (/ 9.0 20.0))
+  (define-fun a () Real
+    (/ 11.0 20.0))
+  (define-fun c () Real
+    (/ 9.0 20.0))
+)
+=== Test case: Discriminant near zero ===
+sat
+(
+  (define-fun c () Real
+    0.0)
+  (define-fun a () Real
+    0.0)
+  (define-fun b () Real
+    (- (/ 999999.0 20000000000.0)))
+)
+=== Test case: Floating-point precision boundary ===
+sat
+(
+  (define-fun b () Real
+    (/ 1.0 1048576.0))
+  (define-fun a () Real
+    (/ 1.0 1073741824.0))
+  (define-fun c () Real
+    (/ 1.0 1048576.0))
+)
+=== Test case: Special combination (a=1,b=0) ===
+sat
+(
+  (define-fun b () Real
+    0.0)
+  (define-fun a () Real
+    1.0)
+  (define-fun c () Real
+    2.0)
+)
+=== Test case: Denormal numbers ===
+sat
+(
+  (define-fun b () Real
+    (/ 100000000000000000001.0 100000000000000000000.0))
+  (define-fun a () Real
+    0.0)
+  (define-fun c () Real
+    0.0)
+)
+=== Test case: Near-integer values ===
+sat
+(
+  (define-fun b () Real
+    (/ 10000000001.0 10000000000.0))
+  (define-fun a () Real
+    0.0)
+  (define-fun c () Real
+    0.0)
+)
