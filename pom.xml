@@ -8,7 +8,7 @@
     <artifactId>testingproject</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>DateTest-z3</name>
+    <name>testingproject</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -37,11 +37,21 @@
 		</dependency>
     </dependencies>
 	
-	
 
     <build>
         <plugins>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+				    <source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+			
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-surefire-plugin</artifactId>
@@ -79,26 +89,30 @@
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
-				<version>1.15.1</version> 
+				<version>1.15.1</version>
 				<configuration>
 					<targetClasses>
+						<param>Quadratic*</param>
 						<param>com.fastaccess.tfl.helper.*</param>
 					</targetClasses>
 					<targetTests>
+						<param>QuadraticCombinatorialTest*</param>
+						<param>com.fastaccess.tfl.helper.*</param>
 						<param>DateZ3*</param>
+						<param>QuadraticZ3Test*</param>
 					</targetTests>
+					<verbose>true</verbose>
+					<mutators>
+						<mutator>ALL</mutator>
+					</mutators>
 					<mutators>
 						<mutator>STRONGER</mutator>
 					</mutators>
 					<features>
 						<feature>+EXPORT</feature>
 					</features>
-					<excludedMethods>
-						<exclude>toString</exclude>
-					</excludedMethods>
 				</configuration>
 			</plugin>
-
 
         </plugins>
     </build>
