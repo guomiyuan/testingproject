@@ -27,4 +27,4 @@ Combinatorial and Z3 testing techniques for testing quadratic equations and hand
 
 # Notes
 - Combinatorial testing tool ACTS download and usage instructions can be found at https://csrc.nist.gov/projects/automated-combinatorial-testing-for-software#
-- The mutation test needs to modify the pom.xml file according to the location of targetClasses and targetTests generated in different cases. The default is Z3 date conversion
+
