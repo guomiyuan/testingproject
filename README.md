@@ -9,11 +9,10 @@ Combinatorial and Z3 testing techniques for testing quadratic equations and hand
 - 'QuadraticCombinatorialTest.java' // Use combinatorial's ACTS tool to generate test cases and then write to this code to test the quadratic equation case
 - 'DateZ3Test.java' //Use Z-solver's tool Z3 to generate test cases and then write to this code to test the date conversion case
 - 'QuadraticZ3Test.java' //Use Z-solver's tool Z3 to generate test cases and then write to this code to test the quadratic equation case
-- The test class covers tests of different dimensions and scenarios (combination tests, Z3 tests, etc.).
-- z3/generate_quadratic_tests.smt2 //Use the Z3 tool to write SMT-LIB scripts for Quadratic Equation cases (to generate test cases)
-- z3/quadratic_test_cases.txt //Use the Z3 tool to write SMT-LIB scripts for Quadratic Equation cases and then execute commands to generate test cases
-- z3/generate_date_tests.smt2 //Use the Z3 tool to write SMT-LIB scripts for date conversion cases (to generate test cases)
-- z3/date_tate_cases.txt //Use the Z3 tool to write an SMT-LIB script for the date conversion case and then execute the command to generate the test case
+- z3/generate_quadratic_tests.smt2 //Use the Z3 tool to write SMT-LIB scripts for Quadratic Equation cases
+- z3/quadratic_test_cases.txt // Test cases generated for Quadratic Equation cases
+- z3/generate_date_tests.smt2 //Use the Z3 tool to write SMT-LIB scripts for Date Conversion cases
+- z3/date_tate_cases.txt // Test cases generated for Date Conversion cases
 - pom.xml // Maven dependencies
 
   #Test Case Generation
