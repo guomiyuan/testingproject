@@ -15,7 +15,7 @@ Combinatorial and Z3 testing techniques for testing quadratic equations and hand
 - z3/date_tate_cases.txt // Test cases generated for Date Conversion cases
 - pom.xml // Maven dependencies
 
-  #Test Case Generation
+# Test Case Generation
 - Combinatorial testing technology uses the ACTS tool to automatically generate test cases
 - Z-Solver testing technology uses the Z3 tool to write SMT-LIB and then run commands to automatically generate test cases
 
