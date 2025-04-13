@@ -5,8 +5,8 @@ Combinatorial and Z3 testing techniques for testing quadratic equations and hand
 
 - `DateHelper`: Provides tools and methods for date processing.
 - `Quadratic`: Implements the root-finding algorithm for quadratic equations, supporting complex and real number results.
-- ‘DateCombinatorialTest.java’ // Use combinatorial's ACTS tool to generate test cases and then write this code to test the date conversion case
-- 'QuadraticCombinatorialTest.java' // Use combinatorial's ACTS tool to generate test cases and then write this code to test the quadratic equation case
+- ‘DateCombinatorialTest.java’ // Use combinatorial's ACTS tool to generate test cases and then write to this code to test the date conversion case
+- 'QuadraticCombinatorialTest.java' // Use combinatorial's ACTS tool to generate test cases and then write to this code to test the quadratic equation case
 - 'DateZ3Test.java' //Use Z-solver's tool Z3 to generate test cases and then write this code to test the date conversion case
 - 'QuadraticZ3Test.java' //Use Z-solver's tool Z3 to generate test cases and then write this code to test the quadratic equation case
 - The test class covers tests of different dimensions and scenarios (combination tests, Z3 tests, etc.).
