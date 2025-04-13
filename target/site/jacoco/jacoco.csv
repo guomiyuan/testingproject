@@ -1,5 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-QuadraticTest,default,Quadratic.NotEnoughPrecisionException,0,4,0,0,0,2,0,1,0,1
-QuadraticTest,default,Quadratic,14,372,0,34,8,65,0,24,0,7
-QuadraticTest,com.fastaccess.tfl.helper,DateHelper,302,0,2,0,69,0,18,0,17,0
-QuadraticTest,com.fastaccess.tfl.helper,DateHelper.DateFormats,329,0,0,0,25,0,3,0,3,0
