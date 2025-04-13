@@ -17,7 +17,7 @@ Combinatorial and Z3 testing techniques for testing quadratic equations and hand
 
 # Test Case Generation
 - Combinatorial testing technology uses the ACTS tool to automatically generate test cases
-- Z-Solver testing technology uses the Z3 tool to write SMT-LIB and then run commands to automatically generate test cases
+- Z-Solver testing technology uses the Z3 tool to write SMT-LIB script and then run commands to automatically generate test cases
 
 # Mutation Testing
 - Use the pitest tool. Modify the pom.xml file and add pitest dependencies 
